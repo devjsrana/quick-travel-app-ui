@@ -1,0 +1,1 @@
+export const travelBanner = require('./../assets/images/travel-world.jpeg');

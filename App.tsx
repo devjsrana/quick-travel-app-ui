@@ -8,14 +8,23 @@
  * @format
  */
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import AppNavigator from './src/navigation/AppNavigator';
+
+const QTravelLightTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#2164a6',
+    secondary: '#0a1c2e'
+  },
+};
 
 
 const App = () => {
 
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={QTravelLightTheme} >
       <AppNavigator />
     </NavigationContainer>
   );

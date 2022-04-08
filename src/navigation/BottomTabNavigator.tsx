@@ -27,7 +27,14 @@ const BottomTabNavigator = (props: Props) => {
             }}
         >
             <Tab.Screen name='Home' component={HomeScreen} options={{
-                tabBarIcon: (props) => <Icon name={props.focused ? "home" : "home-outline"} size={22} color={props.color} />
+                tabBarIcon: (props) => <Icon name={props.focused ? "home" : "home-outline"} size={22} color={props.color} />,
+                headerTitleAlign: "left",
+                headerStyle: {
+                    backgroundColor: colors.background,
+
+                },
+                headerShadowVisible: false
+
             }} />
             <Tab.Screen name='Search' component={SearchScreen} options={{
                 tabBarIcon: (props) => <Icon name={props.focused ? "search" : "search-outline"} size={22} color={props.color} />

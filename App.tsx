@@ -16,7 +16,9 @@ const QTravelLightTheme = {
   colors: {
     ...DefaultTheme.colors,
     primary: '#2164a6',
-    secondary: '#0a1c2e'
+    secondary: '#0a1c2e',
+    tertiary: '#dfb877',
+    background: '#f2f3f4'
   },
 };
 

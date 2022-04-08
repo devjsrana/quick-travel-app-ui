@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { useDeviceOrientation } from '@react-native-community/hooks';
 import React, { useMemo } from 'react'
 import AutoHeightImage from 'react-native-auto-height-image';
+import { useNavigation } from '@react-navigation/native';
 import { PrimaryButton } from './../components/Buttons';
 import colors from '../constants/colors';
 
@@ -11,8 +12,14 @@ type Props = {}
 
 const IntroScreen = (props: Props) => {
     const { landscape } = useDeviceOrientation();
+    const navigation = useNavigation();
 
     const { width, height } = useMemo(() => Dimensions.get("screen"), [landscape]);
+
+    const navigateToMain = () => {
+        //@ts-ignore
+        navigation.navigate("Main");
+    }
 
     return (
         <View style={{ flexDirection: landscape ? "row" : 'column' }} >
@@ -22,7 +29,7 @@ const IntroScreen = (props: Props) => {
                 <Text style={styles.description}>QuickTravel will help and guide you on your advanture {"\n"} like never before.</Text>
 
                 <View style={{ justifyContent: 'center', alignItems: "center", marginTop: 56 }}>
-                    <PrimaryButton width={landscape ? width / 2 - 150 : width - 150} title="Start Now" />
+                    <PrimaryButton width={landscape ? width / 2 - 150 : width - 150} title="Start Now" onPress={navigateToMain} />
                 </View>
             </View>
         </View>

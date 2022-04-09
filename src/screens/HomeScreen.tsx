@@ -1,14 +1,23 @@
-import { Image, StyleSheet, View, TouchableOpacity } from 'react-native'
-import React, { useEffect } from 'react';
+import { Image, StyleSheet, View, TouchableOpacity, Dimensions, ScrollView } from 'react-native'
+import { useDeviceOrientation } from '@react-native-community/hooks';
+import React, { useEffect, useMemo } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import Carousel from 'react-native-snap-carousel';
 import Container from './../components/Container';
 import { P, H4 } from './../components/Text';
 import { userAvatar } from './../constants/images';
 import SearchPlace from './../components/SearchPlace';
+import Section from './../components/Section';
+import SliderPlaceItem from './../components/SliderPlaceItem';
+import RecommendedCard from '../components/RecommendedCard';
+import places, { placeType } from './../data/places';
 type Props = {}
 
 const HomeScreen = (props: Props) => {
     const navigation = useNavigation();
+    const { landscape } = useDeviceOrientation();
+
+    const { width, height } = useMemo(() => Dimensions.get("screen"), [landscape]);
 
     useEffect(() => {
         navigation.setOptions({
@@ -22,10 +31,39 @@ const HomeScreen = (props: Props) => {
         })
     }, [])
 
+    function _renderItem({ item, index }: { item: placeType, index: number }) {
+        return (
+            <SliderPlaceItem image={item.image} title={item.title} place={item.place} discount={item.discount} />
+        );
+    }
+
     return (
-        <Container style={{ marginTop: 25 }}>
-            <SearchPlace />
-        </Container>
+        <ScrollView
+            style={{ flex: 1 }}
+            showsVerticalScrollIndicator={false}
+        >
+            <Container style={{ marginTop: 25 }}>
+                <SearchPlace />
+                <Section title='Popular Nearby'>
+                    <Carousel
+                        data={places}
+                        renderItem={_renderItem}
+                        sliderWidth={width - 30}
+                        itemWidth={landscape ? width / 2.5 : width / 2 + width / 4}
+                        activeSlideAlignment={"start"}
+                        autoplay={true}
+                        autoplayDelay={1000}
+                        loop={true}
+                    />
+                </Section>
+
+                <Section title='Recommended'>
+                    {
+                        places.map((item) => <RecommendedCard key={`rec_item-${item.id}`} image={item.image} title={item.title} place={item.place} price={item.price} />)
+                    }
+                </Section>
+            </Container>
+        </ScrollView>
     )
 }
 

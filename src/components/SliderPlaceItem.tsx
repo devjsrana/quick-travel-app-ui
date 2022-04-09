@@ -1,4 +1,4 @@
-import { ImageBackground, StyleSheet, View, TouchableOpacity } from 'react-native'
+import { ImageBackground, StyleSheet, View, TouchableOpacity, GestureResponderEvent } from 'react-native'
 import React from 'react';
 import { H3, P } from './Text';
 
@@ -6,12 +6,13 @@ type Props = {
     image: any,
     discount: number,
     title: string,
-    place: string
+    place: string,
+    onPress?: ((event: GestureResponderEvent) => void)
 }
 
 const SliderPlaceItem = (props: Props) => {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={props.onPress}>
             <ImageBackground source={props.image} style={styles.imageBg} borderRadius={15} resizeMode={"cover"} >
                 <P style={styles.tag}>{`${props.discount}% OFF`}</P>
             </ImageBackground>

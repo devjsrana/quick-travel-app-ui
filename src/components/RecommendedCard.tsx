@@ -1,24 +1,25 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { H3, H4, P } from './Text'
+import { GestureResponderEvent, Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import React from 'react';
+import { H3, H4, P } from './Text';
 
 type Props = {
     image: any,
     title: string,
     place: string,
-    price: number
+    price: number,
+    onPress?: ((event: GestureResponderEvent) => void)
 }
 
 const RecommendedCard = (props: Props) => {
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={props.onPress}>
             <Image source={props.image} style={styles.image} />
             <View style={{ flexGrow: 1, paddingHorizontal: 15 }}>
                 <H4>{props.title.length < 25 ? props.title : `${props.title.slice(0, 24)}...`}</H4>
                 <P style={{ opacity: .5, marginTop: 5 }}>{props.place}</P>
             </View>
             <H3 style={{ marginRight: 10 }}>{`${props.price}$`}</H3>
-        </View>
+        </TouchableOpacity>
     )
 }
 

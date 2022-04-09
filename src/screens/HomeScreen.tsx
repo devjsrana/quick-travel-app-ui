@@ -17,7 +17,7 @@ const HomeScreen = (props: Props) => {
     const navigation = useNavigation();
     const { landscape } = useDeviceOrientation();
 
-    const { width, height } = useMemo(() => Dimensions.get("screen"), [landscape]);
+    const { width } = useMemo(() => Dimensions.get("screen"), [landscape]);
 
     useEffect(() => {
         navigation.setOptions({
@@ -31,9 +31,14 @@ const HomeScreen = (props: Props) => {
         })
     }, [])
 
+    const goToPlaceDetails = (placeId: number) => {
+        //@ts-ignore
+        navigation.navigate("PlaceDetails", { placeId });
+    }
+
     function _renderItem({ item, index }: { item: placeType, index: number }) {
         return (
-            <SliderPlaceItem image={item.image} title={item.title} place={item.place} discount={item.discount} />
+            <SliderPlaceItem image={item.image} title={item.title} place={item.place} discount={item.discount} onPress={() => goToPlaceDetails(item.id)} />
         );
     }
 
@@ -59,7 +64,7 @@ const HomeScreen = (props: Props) => {
 
                 <Section title='Recommended'>
                     {
-                        places.map((item) => <RecommendedCard key={`rec_item-${item.id}`} image={item.image} title={item.title} place={item.place} price={item.price} />)
+                        places.map((item) => <RecommendedCard key={`rec_item-${item.id}`} image={item.image} title={item.title} place={item.place} price={item.price} onPress={() => goToPlaceDetails(item.id)} />)
                     }
                 </Section>
             </Container>

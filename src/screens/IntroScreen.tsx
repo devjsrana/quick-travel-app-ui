@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, ScrollView } from 'react-native';
 import { useDeviceOrientation } from '@react-native-community/hooks';
 import React, { useMemo } from 'react'
 import AutoHeightImage from 'react-native-auto-height-image';
@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { PrimaryButton } from './../components/Buttons';
 import colors from '../constants/colors';
 
-import { travelBanner } from './../constants/images';
+import { travelBanner, introTop } from './../constants/images';
 
 type Props = {}
 
@@ -22,17 +22,21 @@ const IntroScreen = (props: Props) => {
     }
 
     return (
-        <View style={{ flexDirection: landscape ? "row" : 'column' }} >
-            <AutoHeightImage width={landscape ? width / 2 : width} source={travelBanner} style={landscape ? { height } : {}} />
-            <View style={{ flexGrow: 1 }}>
-                <Text style={[styles.title, { fontSize: landscape ? 24 : 36 }]}>Discover the world around you.</Text>
-                <Text style={styles.description}>QuickTravel will help and guide you on your advanture {"\n"} like never before.</Text>
+        <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false} >
+            <View style={{ flexDirection: landscape ? "row" : 'column' }}>
+                <View style={{ padding: 15 }}>
+                    <AutoHeightImage width={landscape ? width / 3 : width - 30} source={introTop} />
+                </View>
+                <View style={{ flexGrow: 1 }}>
+                    <Text style={[styles.title, { fontSize: landscape ? 24 : 36 }]}>Discover the world around you.</Text>
+                    <Text style={styles.description}>QuickTravel will help and guide you on your advanture {"\n"} like never before.</Text>
 
-                <View style={{ justifyContent: 'center', alignItems: "center", marginTop: 56 }}>
-                    <PrimaryButton width={landscape ? width / 2 - 150 : width - 150} title="Start Now" onPress={navigateToMain} />
+                    <View style={{ justifyContent: 'center', alignItems: "center", marginTop: 56 }}>
+                        <PrimaryButton width={landscape ? width / 2 - 150 : width - 150} title="Start Now" onPress={navigateToMain} />
+                    </View>
                 </View>
             </View>
-        </View>
+        </ScrollView>
     )
 }
 

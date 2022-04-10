@@ -78,7 +78,7 @@ const PlaceDetailScreen = (props: Props) => {
                     </View>
                 </Container>
             </ScrollView>
-            <Container style={styles.bottomShadow}>
+            <Container style={[styles.bottomShadow, { height: landscape ? 80 : 100 }]}>
                 <P style={{ fontWeight: "bold", fontSize: 40 }}>${place.pricePerPerson}</P>
                 <PrimaryButton title='Book Now' width={220} icon={<Icon name='arrow-forward-outline' size={22} style={{ marginLeft: 25 }} color={"white"} />} />
             </Container>
@@ -90,7 +90,6 @@ export default PlaceDetailScreen
 
 const styles = StyleSheet.create({
     bottomShadow: {
-        height: 100,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between"

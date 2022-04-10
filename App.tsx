@@ -18,7 +18,8 @@ const QTravelLightTheme = {
     primary: '#2164a6',
     secondary: '#0a1c2e',
     tertiary: '#dfb877',
-    background: '#f2f3f4'
+    background: '#f2f3f4',
+    info: '#dfb877'
   },
 };
 

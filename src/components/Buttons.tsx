@@ -6,13 +6,15 @@ import { useTheme } from '@react-navigation/native';
 type Props = {
     width?: string | number,
     title: string,
-    onPress?: ((event: GestureResponderEvent) => void)
+    onPress?: ((event: GestureResponderEvent) => void),
+    icon?: React.ReactNode
 }
 
 export const PrimaryButton = (props: Props) => {
     const { colors } = useTheme();
     return <TouchableOpacity style={[styles.btnContainer, { width: props.width || undefined, backgroundColor: colors.primary }]} onPress={props.onPress}>
         <Text style={styles.btnText}>{props.title}</Text>
+        {props.icon}
     </TouchableOpacity>
 }
 
@@ -35,7 +37,10 @@ const styles = StyleSheet.create({
     btnContainer: {
         paddingVertical: 20,
         paddingHorizontal: 20,
-        borderRadius: 999
+        borderRadius: 999,
+        flexDirection: "row",
+        alignItems: 'center',
+        justifyContent: "center"
     },
     btnText: {
         color: "white",
